@@ -1,0 +1,42 @@
+body{
+  background-color: #FCFFDB;
+}
+
+.heading1{
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    text-align: center;
+    margin: 40px auto;
+    font-size: 3rem;
+    color: #7f3f98;
+  }
+  /* #fafbed */
+  .form-1{
+    text-align: center;
+    margin: 0 auto;
+    border: 4px solid #7f3f98;
+    border-radius: 30px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+.main-form{
+  width:300px;
+  margin: auto;
+}
+  .mainimage{
+    border-radius: 30px;
+    width: 100%;
+    margin: 10px;
+  }
+  .image-container{
+    text-align: center;
+
+    
+  }
+  .main-container{
+    margin: 50px 80px;
+    padding: 20px;
+  }
+  .footer{
+    text-align: center;
+  }
