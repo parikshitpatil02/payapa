@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papaya Payment Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f7fa;
+            color: #3a3a3a;
+            margin: 0;
+            padding: 0;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 3rem;
+            font-family: 'Pacifico', cursive;
+            color: #2c3e50;
+            margin-top: 40px;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            padding: 50px;
+        }
+
+        .card {
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .card-text {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .text-orange {
+            color: #f39c12;
+        }
+
+        .text-danger {
+            color: #e74c3c;
+        }
+
+        .text-success {
+            color: #2ecc71;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #34495e;
+            color: white;
+            margin-top: 50px;
+            width: 100%;
+        }
+
+        .icon {
+            font-size: 4rem;
+            color: #3498db;
+            margin-bottom: 30px;
+        }
+
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .details-row span {
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 767px) {
+            .heading {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 1.6rem;
+            }
+
+            .card-text {
+                font-size: 1.1rem;
+            }
+
+            .btn-primary {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Heading -->
+        <h1 class="heading" id="heading">Papaya Payment Details</h1>
+
+        <!-- Payment Details Card -->
+        <div class="card">
+            <div class="text-center">
+                <i class="fas fa-hand-holding-usd icon"></i>
+            </div>
+
+            <h2 class="card-title text-orange" id="total-payment">Your Total Papaya Amount: ₹<span id="total-amount">{{totalAmount}}</span></h2>
+
+            <!-- Breakdown of Expenses -->
+            <div class="details-row">
+                <span id="labour-text">Labour Charges:</span> <span class="text-danger">- ₹<span id="labour">{{labour}}</span></span>
+            </div>
+            <div class="details-row">
+                <span id="katti-text">Katti Charges:</span> <span class="text-danger">- ₹<span id="katti">{{katti}}</span></span>
+            </div>
+            <div class="details-row">
+                <span class="font-weight-bold" id="total-expense">Total Expense:</span> <span class="text-danger">₹<span id="expense">{{expense}}</span></span>
+            </div>
+
+            <hr>
+
+            <h3 class="card-title text-success" id="final-payment">Your Final Papaya Amount: ₹<span id="final-amount">{{finalAmount}}</span></h3>
+
+            <!-- Back Button -->
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-primary btn-lg" id="back-button">Go Back to Calculator</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Parikshit Patil</p>
+    </div>
+
+    <!-- Optional Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const translations = {
+            english: {
+                heading: "Papaya Payment Details",
+                totalPayment: "Your Total Papaya Amount: ₹",
+                labourText: "Labour Charges:",
+                kattiText: "Katti Charges:",
+                totalExpense: "Total Expense:",
+                finalPayment: "Your Final Papaya Amount: ₹",
+                backButton: "Go Back to Calculator",
+            },
+            hindi: {
+                heading: "पपीता भुगतान विवरण",
+                totalPayment: "कुल पपीता राशि: ₹",
+                labourText: "श्रम शुल्क:",
+                kattiText: "काटी शुल्क:",
+                totalExpense: "कुल व्यय:",
+                finalPayment: "आपकी अंतिम पपीता राशि: ₹",
+                backButton: "कैलकुलेटर पर वापस जाएं",
+            },
+            marathi: {
+                heading: "पपीता पेमेंट डिटेल्स",
+                totalPayment: "आपली एकूण पपीता रक्कम: ₹",
+                labourText: "कामगार शुल्क:",
+                kattiText: "काटी शुल्क:",
+                totalExpense: "एकूण खर्च:",
+                finalPayment: "आपली अंतिम पपीता रक्कम: ₹",
+                backButton: "कॅल्क्युलेटरवर परत जा",
+            }
+        };
+
+        const paymentData = {
+            totalAmount: {{totalAmount}},  // These values are dynamically replaced by the server
+            expense: {{expense}},       
+            labour: {{labour}},        
+            katti: {{katti}},         
+            finalAmount: {{finalAmount}},
+            languageSelect: {{languageSelect}}
+        };
+
+        // Function to handle language change
+        const langData = translations[paymentData.languageSelect];
+        console.log(paymentData.languageSelect, 'aa');
+
+            // Translate all dynamic content based on selected language
+        document.getElementById("heading").textContent = langData.heading;
+        document.getElementById("total-payment").textContent = langData.totalPayment;
+        document.getElementById("labour-text").textContent = langData.labourText;
+        document.getElementById("katti-text").textContent = langData.kattiText;
+        document.getElementById("total-expense").textContent = langData.totalExpense;
+        document.getElementById("final-payment").textContent = langData.finalPayment;
+        document.getElementById("back-button").textContent = langData.backButton;
+
+
+        // Set the payment data into the HTML
+        document.getElementById("total-amount").textContent = paymentData.totalAmount;
+        document.getElementById("expense").textContent = paymentData.expense;
+        document.getElementById("labour").textContent = paymentData.labour;
+        document.getElementById("katti").textContent = paymentData.katti;
+        document.getElementById("final-amount").textContent = paymentData.finalAmount;
+
+    </script>
+</body>
+
+</html>

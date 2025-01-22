@@ -8,45 +8,183 @@
     <title>Papaya Payment Calculator</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Pacifico&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+        }
 
-    <!-- CSS fonts -->
-    <link rel="stylesheet" href="styles.css">
+        .heading1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 20px;
+            font-family: 'Pacifico', cursive;
+            color: #ff6600;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-container input {
+            border-radius: 8px;
+        }
+
+        .btn-primary {
+            background-color: #ff6600;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #e65c00;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-top: 30px;
+            max-width: 80%;
+        }
+
+        .mainimage {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #343a40;
+            color: white;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 767px) {
+            .heading1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .footer {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Heading -->
-    <div>
-        <h1 class="heading1">Papaya Payment Calculator</h1>
-    </div>
-    <!-- Ye dusri baar update kr rahe -->
-    <!-- Calculator and Image -->
-    <div class="row main-container">
-        <div class="col-md-6 form-1">
-            <form action="/" method="post" class="main-form" >
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Enter Weight in kg</label>
-                  <input type="number" class="form-control" name="weight" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Weight in kg">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Enter Rate per kg</label>
-                  <input type="number" step="0.01" class="form-control" name="rate" id="exampleInputPassword1" placeholder="Rate per kg">
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Calculate my Payment!</button>
-              </form>
-        </div>
-        <div class="col-md-6 image-container">
-            <img class="mainimage" src="images/papayamain.jpg" alt="papaya image">
+    <div class="container">
+        <!-- Language Selection -->
+        <div class="row">
+            <div class="col-12 text-right">
+                <select id="language-selector" class="form-control w-auto" onchange="changeLanguage()">
+                    <option value="english">English</option>
+                    <option value="hindi">हिंदी</option>
+                    <option value="marathi">मराठी</option>
+                </select>
+            </div>
         </div>
     </div>
+
+    <h1 class="heading1" id="heading">Papaya Payment Calculator</h1>
+
+    <div class="container main-container">
+        <div class="form-container">
+            <form action="/" method="post" class="main-form">
+                <div class="form-group">
+                    <label for="weight" id="weight-label">Enter Weight in kg</label>
+                    <input type="number" class="form-control" name="weight" id="weight" placeholder="Enter Weight in kg" required>
+                </div>
+                <div class="form-group">
+                    <label for="rate" id="rate-label">Enter Rate per kg</label>
+                    <input type="number" step="0.01" class="form-control" name="rate" id="rate" placeholder="Rate per kg" required>
+                </div>
+                 <!-- Hidden input field to store the selected language -->
+                <input type="hidden" name="language" id="language-input">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit-btn">Calculate my Payment!</button>
+            </form>
+        </div>
+
+        <div class="image-container">
+            <img class="mainimage" src="images/papayamain.jpg" alt="Papaya Image">
+        </div>
+    </div>
+
     <div class="footer">
-        <p>Copyright @Parikshit Patil</p>
+        <p id="footer-text">&copy; 2025 Parikshit Patil</p>
     </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Translation data for each language
+        const translations = {
+            english: {
+                heading: "Papaya Payment Calculator",
+                weightLabel: "Enter Weight in kg",
+                rateLabel: "Enter Rate per kg",
+                submitBtn: "Calculate my Payment!",
+                footerText: "© 2025 Parikshit Patil"
+            },
+            hindi: {
+                heading: "पपीता भुगतान कैलकुलेटर",
+                weightLabel: "वजन (किग्रा में) दर्ज करें",
+                rateLabel: "प्रति किग्रा दर दर्ज करें",
+                submitBtn: "मेरा भुगतान निकालें!",
+                footerText: "© 2025 परीक्षित पाटील"
+            },
+            marathi: {
+                heading: "पपीता पेमेंट कॅल्क्युलेटर",
+                weightLabel: "वजन (किलो मध्ये) भरा",
+                rateLabel: "किलो दर भरा",
+                submitBtn: "माझे पेमेंट काढा!",
+                footerText: "© 2025 परीक्षित पाटील"
+            }
+        };
+
+        // Function to change language
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById('language-selector').value;
+            const langData = translations[selectedLanguage];
+
+            document.getElementById('heading').innerText = langData.heading;
+            document.getElementById('weight-label').innerText = langData.weightLabel;
+            document.getElementById('rate-label').innerText = langData.rateLabel;
+            document.getElementById('submit-btn').innerText = langData.submitBtn;
+            document.getElementById('footer-text').innerText = langData.footerText;
+
+            document.getElementById('language-input').value = selectedLanguage;
+        }
+    </script>
 </body>
 
 </html>
